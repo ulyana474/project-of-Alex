@@ -10,10 +10,12 @@
 
 <body>
     <p class = "Demo">Demo</p>
-<div class="wrapper">
-  <video width="800" height="600" controls id="myVideo" autoplay>
-    <source src="videos/video1.mp4" type="video/mp4"> 
-  </video>
+
+    <button id="button-play">play</button>
+     <video width="800" height="600" controls id="myVideo" autoplay>
+      <source src="videos/video1.mp4" type="video/mp4"> 
+    </video>
+  
 
     <ul id="thumbs_left">
       <!-- браузер показывает небольшую встроенную подсказку из атрибута "title" при наведении курсора на текст -->
@@ -66,12 +68,13 @@
 })
 
 var player=document.getElementById('myVideo');
+var button = document.getElementById("button-play");
+
 var width = 1.0 * screen.width;
 var height =  1.0 * screen.height;
-
 var thumbs_left = document.getElementById("thumbs_left");
 var thumbs_right = document.getElementById("thumbs_right");
-var video_width = width - 320;
+var video_width = width - 240;
 video_height = video_width / 16 * 9;
 player.setAttribute("width", video_width);
 player.setAttribute("height", video_height);
@@ -100,13 +103,18 @@ player.addEventListener( "loadedmetadata", function (e) {
         player.src="videos/video"+(count % (iconCount + 1))+".mp4";
         }
 
-function stopVideo(){
+function stopVideo(reset_time = true){
+
           player.pause();
-          player.currentTime = 0;
+          if(reset_time){
+            player.currentTime = 0;
+          }
      }
 
-function playVideo(){
-  player.src="videos/video"+(count % (iconCount + 1))+".mp4";
+function playVideo(change_src = true){
+  if(change_src){
+      player.src="videos/video"+(count % (iconCount + 1))+".mp4";
+  }
   player.play();
 }
 
@@ -121,6 +129,14 @@ for (let i = 1; i <= iconCount; i++) {
   }
 } 
 
+button.onclick = function(event){
+  if(player.playing){ 
+     stopVideo(false);
+    }
+  else{
+    playVideo(false);
+  }
+}
   
   </script>
 
