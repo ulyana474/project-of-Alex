@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -10,38 +10,53 @@
 
 <body>
     <p class = "Demo">Demo</p>
-  <video width="400" height="300" controls src="videos/task1.mp4" id="myVideo" autoplay>
-    video not supported
-    <track kind="subtitles" src="subtitles/ru.wtt" srclang="ru"  label="Русский">
-</video>
+<div class="wrapper">
+  <video width="800" height="600" controls id="myVideo" autoplay>
+    <source src="videos/video1.mp4" type="video/mp4"> 
+  </video>
 
-  <ul id="thumbs">
-    <!-- браузер показывает небольшую встроенную подсказку из атрибута "title" при наведении курсора на текст -->
-    <li>
-     <img src="videos/task1.png" id = "icon1">
-    </li>
-    <li>
-      <img src="videos/task2.PNG" id = "icon2">
-    </li>
+    <ul id="thumbs_left">
+      <!-- браузер показывает небольшую встроенную подсказку из атрибута "title" при наведении курсора на текст -->
+      <li>
+      <img src="videos/video1.png" id = "icon1" class="left">
+      </li>
+      <li>
+        <img src="videos/video2.PNG" id = "icon2" class="left">
+      </li>
+      <li> 
+        <img src="videos/video3.PNG" id = "icon3" class="left">
+      </li>
+      <li> 
+        <img src="videos/video4.PNG" id = "icon4" class="left">
+      </li>
+      <li> 
+        <img src="videos/video5.PNG" id = "icon5" class="left">
+      </li>
+      <li> 
+        <img src="videos/video6.PNG" id = "icon6" class="left">
+      </li>
+      </ul>
+      <ul id="thumbs_right">
+      <li> 
+        <img src="videos/video7.PNG" id = "icon7" class="right">
+      </li>
+      <li> 
+        <img src="videos/video8.PNG" id = "icon8" class="right">
+      </li>
     <li> 
-      <img src="videos/task3.PNG" id = "icon3">
-    </li>
+        <img src="videos/video9.PNG" id = "icon9" class="right">
+      </li>
     <li> 
-      <img src="videos/task4.PNG" id = "icon4">
-    </li>
+        <img src="videos/video10.PNG" id = "icon10" class="right">
+      </li>
     <li> 
-      <img src="videos/task5.PNG" id = "icon5">
-    </li>
-    <li> 
-      <img src="videos/task6.PNG" id = "icon6">
-    </li>
-    <li> 
-      <img src="videos/task7.PNG" id = "icon7">
-    </li>
-    <li> 
-      <img src="videos/task8.PNG" id = "icon8">
-    </li>
-  </ul>
+        <img src="videos/video11.PNG" id = "icon11" class="right">
+      </li>
+      <li> 
+        <img src="videos/video12.PNG" id = "icon12" class="right">
+      </li>
+    </ul>
+  </div>
   <script>
     //https://stackoverflow.com/questions/6877403/how-to-tell-if-a-video-element-is-currently-playing
     Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
@@ -51,11 +66,27 @@
 })
 
 var player=document.getElementById('myVideo');
-var source = player.getAttribute('src');
+var width = 1.0 * screen.width;
+var height =  1.0 * screen.height;
+
+var thumbs_left = document.getElementById("thumbs_left");
+var thumbs_right = document.getElementById("thumbs_right");
+var video_width = width - 320;
+video_height = video_width / 16 * 9;
+player.setAttribute("width", video_width);
+player.setAttribute("height", video_height);
+
+
 var count = 1;
-var iconCount  = 8;
+var iconCount  = 12;
 
 player.addEventListener('ended',onEnded,false);
+
+player.addEventListener( "loadedmetadata", function (e) {
+    var videoWidth = this.videoWidth;
+     var videoHeight = this.videoHeight;	
+		
+}, false );
 
     function onEnded(e) {
         if(!e) 
@@ -66,7 +97,7 @@ player.addEventListener('ended',onEnded,false);
         else{
           count++;
         }
-        player.src="videos/task"+(count % (iconCount + 1))+".mp4";
+        player.src="videos/video"+(count % (iconCount + 1))+".mp4";
         }
 
 function stopVideo(){
@@ -75,83 +106,22 @@ function stopVideo(){
      }
 
 function playVideo(){
-  player.src="videos/task"+(count % (iconCount + 1))+".mp4";
+  player.src="videos/video"+(count % (iconCount + 1))+".mp4";
   player.play();
 }
 
-
-  document.getElementById("icon1").onclick = function(event){
+for (let i = 1; i <= iconCount; i++) {
+  document.getElementById("icon" + i).onclick = function(event){
     
     if(player.playing){ 
      stopVideo();
     }
-    count = 1;
+    count = i;
     playVideo();
   }
+} 
+
   
-  document.getElementById("icon2").onclick = function(event){
-    
-    if(player.playing){ 
-     stopVideo();
-    }
-    
-    count = 2;
-    playVideo();
-  }
-
-  document.getElementById("icon3").onclick = function(event){
-    
-    if(player.playing){ 
-     stopVideo();
-    }
-    count = 3;
-    playVideo();
-  }
-
-  document.getElementById("icon4").onclick = function(event){
-    
-    if(player.playing){ 
-     stopVideo();
-    }
-    count = 4;
-    playVideo();
-  }
-
-  document.getElementById("icon5").onclick = function(event){
-    
-    if(player.playing){ 
-     stopVideo();
-    }
-    count = 5;
-    playVideo();
-  }
-
-  document.getElementById("icon6").onclick = function(event){
-    
-    if(player.playing){ 
-     stopVideo();
-    }
-    count = 6;
-    playVideo();
-  }
-
-  document.getElementById("icon7").onclick = function(event){
-    
-    if(player.playing){ 
-     stopVideo();
-    }
-    count = 7;
-    playVideo();
-  }
-
-  document.getElementById("icon8").onclick = function(event){
-    
-    if(player.playing){ 
-     stopVideo();
-    }
-    count = 8;
-    playVideo();
-  }
   </script>
 
 </body>

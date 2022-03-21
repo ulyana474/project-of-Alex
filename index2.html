@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Галерея</title>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>task7</title>
+</head>
+
+<body>
+    <p class = "Demo">Demo</p>
+<div class="wrapper">
+  <video width="800" height="600" controls id="myVideo" autoplay>
+    <source src="videos/video1.mp4" type="video/mp4"> 
+  </video>
+  <section>
+
+    <img src="videos/video1.png" class="gallery" id = "icon1"/>
+    
+    <img src="videos/video2.PNG" class="gallery" id = "icon2"/>
+    
+    <img src="videos/video3.PNG" class="gallery" id = "icon3"/>
+    
+    <img src="videos/video4.PNG" class="gallery"  id = "icon4"/>
+
+    <img src="videos/video5.PNG" class="gallery" id = "icon5"/>
+    
+  </section>
+    
+  
+  <script>
+    //https://stackoverflow.com/questions/6877403/how-to-tell-if-a-video-element-is-currently-playing
+    Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+    get: function(){
+        return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+    }
+})
+
+var player=document.getElementById('myVideo');
+var width = 0.9 * screen.width;
+var height =  0.8 * screen.height;
+
+
+var count = 1;
+var iconCount  = 12;
+
+player.addEventListener('ended',onEnded,false);
+
+player.addEventListener( "loadedmetadata", function (e) {
+    var videoWidth = this.videoWidth;
+     var videoHeight = this.videoHeight;	
+		
+}, false );
+
+    function onEnded(e) {
+        if(!e) 
+        { e = window.event; }
+        if(count == iconCount){
+          count = 1;
+        }
+        else{
+          count++;
+        }
+        player.src="videos/video"+(count % (iconCount + 1))+".mp4";
+        }
+
+function stopVideo(){
+          player.pause();
+          player.currentTime = 0;
+     }
+
+function playVideo(){
+  player.src="videos/video"+(count % (iconCount + 1))+".mp4";
+  player.play();
+}
+
+for (let i = 1; i <= iconCount; i++) {
+  document.getElementById("icon" + i).onclick = function(event){
+    
+    if(player.playing){ 
+     stopVideo();
+    }
+    count = i;
+    playVideo();
+  }
+} 
+
+  
+  </script>
+
+</body>
+</html>

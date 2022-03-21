@@ -1,17 +1,67 @@
-body {
+body, html {
   margin: 0;
   padding: 0;
   font: 75%/120% sans-serif;
   background-color: #87CEEB;
+  height: 100%;
 }
 .Demo{
   text-align: center;
   font-size: 3em;
+  
 }
+#thumbs_left li {
+  list-style: none;
+  display:inline-block;
+   width:300px; /* adjust */
+   height:150px; /* adjust */
+   padding: 5px; /*adjust*/
+}
+
+#thumbs_right li {
+  list-style: none;
+  display:inline-block;
+   width:300px; /* adjust */
+   height:150px; /* adjust */
+   padding: 5px; /*adjust*/
+   margin-left: 950px;
+}
+
+.gallery {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  border: 5px solid black;
+  border-radius: 15px;
+  text-align: right;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  top: -100;
+}
+
+#thumbs_left{
+  width: 100px;
+  position: fixed;
+  top: 0;
+  margin: 0;
+  padding: 0px;
+  
+}
+
+#thumbs_right{
+  width: 100px;
+  position: fixed;
+  top: 0;
+  margin: 0;
+  padding: 0px;
+  
+}
+
 #myVideo {
   border: solid 1px #ccc;
-  width: 550px;
-  height: 400px;
+  width: 960px;
+  height: 540px;
   padding: 5px;
   display: block;
   margin-left: auto;
@@ -19,26 +69,34 @@ body {
   border-style: none;
 }
 
-#thumbs img {
+#thumbs_left img {
   border: solid 1px #ccc;
   width: 100px;
   height: 100px;
-  padding: 3px;
-  margin: 2px;
+  padding: 0px;
+  margin: 0px;
 }
 
-#thumbs :hover {
+#thumbs_right img {
+  border: solid 1px #ccc;
+  width: 100px;
+  height: 100px;
+  padding: 0px;
+  margin: 0px;
+}
+
+#thumbs_left :hover {
   border-color: navy;
 }
 
-#thumbs li {
-  list-style: none;
+#thumbs_right :hover {
+  border-color: navy;
 }
 
-#thumbs {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
 }
